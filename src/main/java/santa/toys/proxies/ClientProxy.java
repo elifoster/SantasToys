@@ -9,9 +9,9 @@ import santa.toys.entity.EntityEnderBlast;
 import santa.toys.entity.EntityNetherStarBlast;
 import santa.toys.entity.EntitySapling;
 
-public class Client extends Common {
-
-    public void initRenderers(){
+public class ClientProxy extends CommonProxy {
+    @Override
+    public void initRenderers() {
         RenderingRegistry.registerEntityRenderingHandler(EntityEnderBlast.class, new RenderSnowball(Items.ender_pearl));
         RenderingRegistry.registerEntityRenderingHandler(EntityNetherStarBlast.class, new RenderSnowball(Items.nether_star));
         RenderingRegistry.registerEntityRenderingHandler(EntitySapling.class, new RenderSnowball(Item.getItemFromBlock(Blocks.sapling)));

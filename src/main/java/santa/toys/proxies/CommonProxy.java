@@ -1,5 +1,5 @@
 package santa.toys.proxies;
 
-public class Common {
+public class CommonProxy {
     public void initRenderers() {}
 }

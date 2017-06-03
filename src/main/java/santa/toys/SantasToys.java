@@ -8,13 +8,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import santa.toys.blocks.BlockHandler;
 import santa.toys.items.ItemHandler;
-import santa.toys.proxies.Common;
+import santa.toys.proxies.CommonProxy;
 import santa.toys.world.SpicedSandGenerator;
 
 @Mod(modid = "santastoys", name = "Santa's Toys", version = "0.4")
 public class SantasToys {
-    @SidedProxy(clientSide="santa.toys.proxies.Client", serverSide="santa.toys.proxies.Common")
-    public static Common proxy;
+    @SidedProxy(clientSide="santa.toys.proxies.ClientProxy", serverSide="santa.toys.proxies.CommonProxy")
+    public static CommonProxy proxy;
     public static CreativeTabs tabSantasToys = new SantasToysTab();
 
     @Mod.EventHandler
