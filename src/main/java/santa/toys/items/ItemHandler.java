@@ -14,13 +14,13 @@ public class ItemHandler {
 
     public static void initializeItems() {
         if (Config.enableMatch) {
-            match = new Match();
+            match = new ItemMatch();
         }
 
         if (Config.enableEnderBlaster) {
-            enderBlaster = new EnderBlaster();
+            enderBlaster = new ItemEnderBlaster();
             if (Config.enableNetherBlaster) {
-                netherBlaster = new NetherStarBlaster();
+                netherBlaster = new ItemNetherStarBlaster();
             }
         }
     }

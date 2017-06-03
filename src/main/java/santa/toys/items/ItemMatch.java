@@ -9,8 +9,8 @@ import santa.toys.SantasToys;
 
 import java.util.List;
 
-public class Match extends Item {
-    public Match() {
+public class ItemMatch extends Item {
+    public ItemMatch() {
         super();
         this.maxStackSize = 32;
         this.setCreativeTab(SantasToys.tabSantasToys);

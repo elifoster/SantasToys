@@ -5,8 +5,8 @@ import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import santa.toys.SantasToys;
 
-public class HeavyLight extends BlockFalling {
-    public HeavyLight() {
+public class BlockHeavyLight extends BlockFalling {
+    public BlockHeavyLight() {
         super(Material.iron);
         this.setBlockName(BlockInfo.HEAVY_UNLOCALIZED_NAME);
         this.setCreativeTab(SantasToys.tabSantasToys);

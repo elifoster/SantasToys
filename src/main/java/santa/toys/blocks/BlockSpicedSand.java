@@ -20,10 +20,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import santa.toys.SantasToys;
 
-public class SpicedSand extends Block {
+public class BlockSpicedSand extends Block {
     private static PotionEffect slowness = new PotionEffect(Potion.moveSlowdown.id, 20, 1);
     private static float damage = (float) Config.damageDealtBySand;
-    public SpicedSand() {
+    public BlockSpicedSand() {
         super(Material.sand);
         this.setBlockName(BlockInfo.SAND_UNLOCALIZED_NAME);
         this.setCreativeTab(SantasToys.tabSantasToys);

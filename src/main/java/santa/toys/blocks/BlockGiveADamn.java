@@ -11,8 +11,8 @@ import net.minecraft.util.IIcon;
 
 import santa.toys.SantasToys;
 
-public class GiveADamn extends BlockRotatedPillar {
-    public GiveADamn() {
+public class BlockGiveADamn extends BlockRotatedPillar {
+    public BlockGiveADamn() {
         super(Material.ground);
         this.setBlockName(BlockInfo.DAMN_UNLOCALIZED_NAME);
         this.setCreativeTab(SantasToys.tabSantasToys);

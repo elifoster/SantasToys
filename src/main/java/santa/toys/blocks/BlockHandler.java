@@ -15,15 +15,15 @@ public class BlockHandler {
 
     public static void initializeBlocks() {
         if (Config.enableGiveADamn) {
-            giveADamn = new GiveADamn();
+            giveADamn = new BlockGiveADamn();
         }
 
         if (Config.enableGlowstone) {
-            glowstone = new HeavyLight();
+            glowstone = new BlockHeavyLight();
         }
 
         if (Config.enableSpicedSand) {
-            sandSpiced = new SpicedSand();
+            sandSpiced = new BlockSpicedSand();
         }
     }
 
