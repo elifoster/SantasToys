@@ -44,29 +44,29 @@ public class BlockHandler {
 
     public static void addRecipes(){
         if (Config.enableGiveADamn) {
-            GameRegistry.addRecipe(new ItemStack(giveADamn, 1), new Object[] {
+            GameRegistry.addRecipe(new ItemStack(giveADamn, 1),
               "X ",
               "ZX",
-              Character.valueOf('X'), Items.rotten_flesh, Character.valueOf('Z'), Blocks.dirt
-            });
+              'X', Items.rotten_flesh,
+              'Z', Blocks.dirt);
         }
 
         if (Config.enableGlowstone) {
-            GameRegistry.addRecipe(new ShapedOreRecipe(glowstone, true, new Object[] {
+            GameRegistry.addRecipe(new ShapedOreRecipe(glowstone,
               " X ",
               "XYX",
               " X ",
-              Character.valueOf('X'), "ingotIron", Character.valueOf('Y'), Blocks.glowstone
-            }));
+              'X', "ingotIron", 'Y', Blocks.glowstone
+            ));
         }
 
         if (Config.enableSpicedSand) {
-            GameRegistry.addRecipe(new ItemStack(sandSpiced, 1), new Object[] {
+            GameRegistry.addRecipe(new ItemStack(sandSpiced, 1),
               "///",
               "/#/",
               "///",
-              Character.valueOf('/'), Items.blaze_rod, Character.valueOf('#'), Blocks.sand
-            });
+              '/', Items.blaze_rod,
+              '#', Blocks.sand);
         }
     }
 }

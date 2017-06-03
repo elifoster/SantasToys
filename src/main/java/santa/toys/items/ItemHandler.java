@@ -39,27 +39,31 @@ public class ItemHandler {
 
     public static void addRecipes(){
         if (Config.enableMatch) {
-            GameRegistry.addRecipe(new ItemStack(match, 1), new Object[]{
-                    "X",
-                    "Z",
-                    'X', Items.flint, 'Z', Items.stick
-            });
+            GameRegistry.addRecipe(new ItemStack(match, 1),
+              "X",
+              "Z",
+              'X', Items.flint,
+              'Z', Items.stick);
         }
 
         if (Config.enableEnderBlaster) {
-            GameRegistry.addRecipe(new ItemStack(enderBlaster, 1), new Object[]{
-                    "XFZ",
-                    "XGE",
-                    "YYX",
-                    'X', Items.iron_ingot, 'Z', Items.diamond, 'E', Items.ender_pearl, 'F', Blocks.sticky_piston, 'G', Blocks.stone_button, 'Y', Blocks.obsidian
-            });
+            GameRegistry.addRecipe(new ItemStack(enderBlaster, 1),
+              "XFZ",
+              "XGE",
+              "YYX",
+              'X', Items.iron_ingot,
+              'Z', Items.diamond,
+              'E', Items.ender_pearl,
+              'F', Blocks.sticky_piston,
+              'G', Blocks.stone_button,
+              'Y', Blocks.obsidian);
             if (Config.enableNetherBlaster) {
-                GameRegistry.addRecipe(new ItemStack(netherBlaster, 1), new Object[]{
+                GameRegistry.addRecipe(new ItemStack(netherBlaster, 1),
                   " X ",
                   "XZX",
                   " X ",
-                  'X', Items.nether_star, 'Z', enderBlaster
-                });
+                  'X', Items.nether_star,
+                  'Z', enderBlaster);
             }
         }
     }
