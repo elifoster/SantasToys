@@ -9,7 +9,4 @@ public class ItemInfo {
 
     public static final String NETHER_UNLOCALIZED_NAME = "netherBlaster";
     public static final String NETHER_KEY = "nether_blaster";
-
-//    public static final String SAPLING_UNLOCALIZED_NAME = "saplingBlaster";
-//    public static final String SAPLING_KEY = "sapling_blaster";
 }

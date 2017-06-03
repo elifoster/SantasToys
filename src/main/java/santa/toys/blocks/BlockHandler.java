@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import santa.toys.Config;
 
@@ -13,7 +12,6 @@ public class BlockHandler {
     public static Block giveADamn;
     public static Block glowstone;
     public static Block sandSpiced;
-//    public static Block muffler;
 
     public static void initializeBlocks() {
         if (Config.enableGiveADamn) {
@@ -27,12 +25,6 @@ public class BlockHandler {
         if (Config.enableSpicedSand) {
             sandSpiced = new SpicedSand();
         }
-        /*
-
-        if (Config.enableMuffler){
-            muffler = new Muffler();
-        }
-        */
     }
 
     public static void registerBlocks() {
@@ -47,12 +39,6 @@ public class BlockHandler {
         if (Config.enableSpicedSand) {
             GameRegistry.registerBlock(sandSpiced, BlockInfo.SAND_KEY);
         }
-        /*
-
-        if (Config.enableMuffler){
-            GameRegistry.registerBlock(muffler, BlockInfo.MUFFLER_KEY);
-        }
-        */
     }
 
 
@@ -82,11 +68,5 @@ public class BlockHandler {
               Character.valueOf('/'), Items.blaze_rod, Character.valueOf('#'), Blocks.sand
             });
         }
-        /*
-
-        if (Config.enableMuffler){
-            GameRegistry.addRecipe(new ItemStack(muffler, 1), new Object[]{"XXX", "XXX", "XXX", Character.valueOf('X'), Blocks.wool});
-        }
-        */
     }
 }
