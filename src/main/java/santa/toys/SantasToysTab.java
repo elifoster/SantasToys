@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 import santa.toys.items.ItemHandler;
 
 public class SantasToysTab extends CreativeTabs {
-    public SantasToysTab(String tabLabel) {
-        super(tabLabel);
+    SantasToysTab() {
+        super("Santa's Toys");
     }
 
     @Override
