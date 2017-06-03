@@ -9,7 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import santa.toys.blocks.BlockHandler;
 import santa.toys.items.ItemHandler;
 import santa.toys.proxies.Common;
-import santa.toys.world.SantasToysGenerator;
+import santa.toys.world.SpicedSandGenerator;
 
 @Mod(modid = "santastoys", name = "Santa's Toys", version = "0.4")
 public class SantasToys {
@@ -25,7 +25,7 @@ public class SantasToys {
         BlockHandler.registerBlocks();
         BlockHandler.addRecipes();
 
-        GameRegistry.registerWorldGenerator(new SantasToysGenerator(), 1);
+        GameRegistry.registerWorldGenerator(new SpicedSandGenerator(), 1);
     }
 
     @Mod.EventHandler
