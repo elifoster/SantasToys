@@ -1,12 +1,12 @@
-package santa.toys.items;
+package io.github.elifoster.santastoys.items;
 
+import io.github.elifoster.santastoys.entity.EntityNetherStarBlast;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import santa.toys.SantasToys;
-import santa.toys.entity.EntityNetherStarBlast;
+import io.github.elifoster.santastoys.SantasToys;
 
 import java.util.List;
 

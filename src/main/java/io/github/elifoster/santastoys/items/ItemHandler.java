@@ -1,11 +1,11 @@
-package santa.toys.items;
+package io.github.elifoster.santastoys.items;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import io.github.elifoster.santastoys.Config;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import santa.toys.Config;
 
 public class ItemHandler {
     public static Item match;

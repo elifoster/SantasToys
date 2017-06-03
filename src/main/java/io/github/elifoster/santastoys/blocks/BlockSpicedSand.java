@@ -1,24 +1,19 @@
-package santa.toys.blocks;
+package io.github.elifoster.santastoys.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import santa.toys.Config;
+import io.github.elifoster.santastoys.Config;
 
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
-import santa.toys.SantasToys;
+import io.github.elifoster.santastoys.SantasToys;
 
 public class BlockSpicedSand extends Block {
     private static PotionEffect slowness = new PotionEffect(Potion.moveSlowdown.id, 20, 1);

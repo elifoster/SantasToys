@@ -1,12 +1,12 @@
-package santa.toys.world;
+package io.github.elifoster.santastoys.world;
 
 import cpw.mods.fml.common.IWorldGenerator;
+import io.github.elifoster.santastoys.Config;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import santa.toys.Config;
-import santa.toys.blocks.BlockHandler;
+import io.github.elifoster.santastoys.blocks.BlockHandler;
 
 import java.util.Random;
 

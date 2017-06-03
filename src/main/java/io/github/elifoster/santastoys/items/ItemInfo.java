@@ -1,4 +1,4 @@
-package santa.toys.items;
+package io.github.elifoster.santastoys.items;
 
 public class ItemInfo {
     public static final String MATCH_UNLOCALIZED_NAME = "match";

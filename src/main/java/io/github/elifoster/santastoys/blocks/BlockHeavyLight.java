@@ -1,9 +1,9 @@
-package santa.toys.blocks;
+package io.github.elifoster.santastoys.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
-import santa.toys.SantasToys;
+import io.github.elifoster.santastoys.SantasToys;
 
 public class BlockHeavyLight extends BlockFalling {
     public BlockHeavyLight() {

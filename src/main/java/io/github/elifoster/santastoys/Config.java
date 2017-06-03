@@ -1,4 +1,4 @@
-package santa.toys;
+package io.github.elifoster.santastoys;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.config.Configuration;

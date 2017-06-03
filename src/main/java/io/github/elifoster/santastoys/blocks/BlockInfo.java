@@ -1,4 +1,4 @@
-package santa.toys.blocks;
+package io.github.elifoster.santastoys.blocks;
 
 public class BlockInfo {
     public static final String DAMN_UNLOCALIZED_NAME = "damnBlock";

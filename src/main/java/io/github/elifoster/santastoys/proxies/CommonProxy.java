@@ -1,4 +1,4 @@
-package santa.toys.proxies;
+package io.github.elifoster.santastoys.proxies;
 
 public class CommonProxy {
     public void initRenderers() {}

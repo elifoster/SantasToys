@@ -1,15 +1,15 @@
-package santa.toys;
+package io.github.elifoster.santastoys;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import io.github.elifoster.santastoys.blocks.BlockHandler;
+import io.github.elifoster.santastoys.items.ItemHandler;
+import io.github.elifoster.santastoys.proxies.CommonProxy;
+import io.github.elifoster.santastoys.world.SpicedSandGenerator;
 import net.minecraft.creativetab.CreativeTabs;
-import santa.toys.blocks.BlockHandler;
-import santa.toys.items.ItemHandler;
-import santa.toys.proxies.CommonProxy;
-import santa.toys.world.SpicedSandGenerator;
 
 @Mod(modid = "santastoys", name = "Santa's Toys", version = "0.4")
 public class SantasToys {

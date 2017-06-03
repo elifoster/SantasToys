@@ -1,4 +1,4 @@
-package santa.toys.entity;
+package io.github.elifoster.santastoys.entity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

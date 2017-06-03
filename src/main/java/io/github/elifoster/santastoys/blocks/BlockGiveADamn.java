@@ -1,4 +1,4 @@
-package santa.toys.blocks;
+package io.github.elifoster.santastoys.blocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,7 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
-import santa.toys.SantasToys;
+import io.github.elifoster.santastoys.SantasToys;
 
 public class BlockGiveADamn extends BlockRotatedPillar {
     public BlockGiveADamn() {

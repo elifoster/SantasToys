@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'forge'
 
 version = "0.5.1"
-group = "santa.toys"
+group = "io.github.elifoster.santastoys"
 archivesBaseName = "SantasToys-1.7"
 
 minecraft {

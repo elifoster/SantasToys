@@ -1,10 +1,10 @@
-package santa.toys.proxies;
+package io.github.elifoster.santastoys.proxies;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import io.github.elifoster.santastoys.entity.EntityNetherStarBlast;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Items;
-import santa.toys.entity.EntityEnderBlast;
-import santa.toys.entity.EntityNetherStarBlast;
+import io.github.elifoster.santastoys.entity.EntityEnderBlast;
 
 public class ClientProxy extends CommonProxy {
     @Override

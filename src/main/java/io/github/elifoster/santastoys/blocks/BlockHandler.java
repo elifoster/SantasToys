@@ -1,12 +1,12 @@
-package santa.toys.blocks;
+package io.github.elifoster.santastoys.blocks;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import io.github.elifoster.santastoys.Config;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import santa.toys.Config;
 
 public class BlockHandler {
     public static Block giveADamn;
