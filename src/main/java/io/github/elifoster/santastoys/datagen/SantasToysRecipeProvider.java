@@ -31,14 +31,6 @@ public class SantasToysRecipeProvider extends RecipeProvider {
         /*
         Blocks
          */
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GIVE_A_DAMN_ITEM.get())
-          .pattern("X ")
-          .pattern("ZX")
-          .define('X', Items.ROTTEN_FLESH)
-          .define('Z', Items.DIRT)
-          .unlockedBy(UNLOCK_RIGHT_AWAY, PlayerTrigger.TriggerInstance.tick())
-          .save(output);
-
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, HEAVY_LIGHT_ITEM.get())
           .pattern(" X ")
           .pattern("XYX")

@@ -13,7 +13,6 @@ public class SantasToysItemModelsProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent(BlockHandler.GIVE_A_DAMN.getId().getPath(), loc(BlockHandler.NAME_GIVE_A_DAMN));
         withExistingParent(BlockHandler.SPICED_SAND.getId().getPath(), loc(BlockHandler.NAME_SPICED_SAND));
         withExistingParent(BlockHandler.HEAVY_LIGHT.getId().getPath(), mcLoc("glowstone"));
     }
