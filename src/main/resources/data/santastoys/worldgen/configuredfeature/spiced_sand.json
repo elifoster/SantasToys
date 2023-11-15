@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:replace_single_block",
+  "config": {
+    "targets": [
+      {
+        "target": {
+          "predicate_type": "block_match",
+          "block": "minecraft:soul_sand",
+          "probability": 0.05
+        },
+        "state": {
+          "Name": "santastoys:spiced_sand"
+        }
+      }
+    ]
+  }
+}

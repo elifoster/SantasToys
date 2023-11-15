@@ -1,72 +1,48 @@
 package io.github.elifoster.santastoys.blocks;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import io.github.elifoster.santastoys.Config;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
+import net.neoforged.neoforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
+
+import static io.github.elifoster.santastoys.SantasToys.REGISTER_BLOCKS;
+import static io.github.elifoster.santastoys.SantasToys.REGISTER_ITEMS;
 
 public class BlockHandler {
-    public static Block giveADamn;
-    public static Block glowstone;
-    public static Block sandSpiced;
+    public static final String NAME_GIVE_A_DAMN = "give_a_damn";
+    public static final String NAME_HEAVY_LIGHT = "heavy_light";
+    public static final String NAME_SPICED_SAND = "spiced_sand";
+
+    public static RegistryObject<Block> GIVE_A_DAMN;
+    public static RegistryObject<Item> GIVE_A_DAMN_ITEM;
+    public static RegistryObject<Block> HEAVY_LIGHT;
+    public static RegistryObject<Item> HEAVY_LIGHT_ITEM;
+    public static RegistryObject<Block> SPICED_SAND;
+    public static RegistryObject<Item> SPICED_SAND_ITEM;
+
+    private static RegistryObject<Item> createBlockItem(String name, Supplier<Block> forBlockSupplier) {
+        return REGISTER_ITEMS.register(name, () -> new BlockItem(forBlockSupplier.get(), new Item.Properties()));
+    }
 
     public static void initializeBlocks() {
-        if (Config.enableGiveADamn) {
-            giveADamn = new BlockGiveADamn();
-        }
+        GIVE_A_DAMN = REGISTER_BLOCKS.register(NAME_GIVE_A_DAMN, BlockGiveADamn::new);
+        GIVE_A_DAMN_ITEM = createBlockItem(NAME_GIVE_A_DAMN, () -> GIVE_A_DAMN.get());
 
-        if (Config.enableGlowstone) {
-            glowstone = new BlockHeavyLight();
-        }
+        HEAVY_LIGHT = REGISTER_BLOCKS.register(NAME_HEAVY_LIGHT, () -> new FallingBlock(BlockBehaviour.Properties.of()
+          .strength(0.6F)
+          .explosionResistance(1F)
+          .lightLevel(state -> 15)
+          .sound(SoundType.GLASS)
+          .mapColor(MapColor.SAND)));
+        HEAVY_LIGHT_ITEM = createBlockItem(NAME_HEAVY_LIGHT, HEAVY_LIGHT);
 
-        if (Config.enableSpicedSand) {
-            sandSpiced = new BlockSpicedSand();
-        }
-    }
-
-    public static void registerBlocks() {
-        if (Config.enableGiveADamn) {
-            GameRegistry.registerBlock(giveADamn, BlockInfo.DAMN_KEY);
-        }
-
-        if (Config.enableGlowstone) {
-            GameRegistry.registerBlock(glowstone, BlockInfo.HEAVY_KEY);
-        }
-
-        if (Config.enableSpicedSand) {
-            GameRegistry.registerBlock(sandSpiced, BlockInfo.SAND_KEY);
-        }
-    }
-
-
-    public static void addRecipes(){
-        if (Config.enableGiveADamn) {
-            GameRegistry.addRecipe(new ItemStack(giveADamn, 1),
-              "X ",
-              "ZX",
-              'X', Items.rotten_flesh,
-              'Z', Blocks.dirt);
-        }
-
-        if (Config.enableGlowstone) {
-            GameRegistry.addRecipe(new ShapedOreRecipe(glowstone,
-              " X ",
-              "XYX",
-              " X ",
-              'X', "ingotIron", 'Y', Blocks.glowstone
-            ));
-        }
-
-        if (Config.enableSpicedSand) {
-            GameRegistry.addRecipe(new ItemStack(sandSpiced, 1),
-              "///",
-              "/#/",
-              "///",
-              '/', Items.blaze_rod,
-              '#', Blocks.sand);
-        }
+        SPICED_SAND = REGISTER_BLOCKS.register(NAME_SPICED_SAND, BlockSpicedSand::new);
+        SPICED_SAND_ITEM = createBlockItem(NAME_SPICED_SAND, SPICED_SAND);
     }
 }

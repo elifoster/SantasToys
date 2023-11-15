@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "X": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "Z": {
+      "item": "minecraft:dirt"
+    }
+  },
+  "pattern": [
+    "X ",
+    "ZX"
+  ],
+  "result": {
+    "item": "santastoys:give_a_damn"
+  },
+  "show_notification": true
+}

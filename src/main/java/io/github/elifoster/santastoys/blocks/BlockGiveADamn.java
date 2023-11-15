@@ -1,46 +1,32 @@
 package io.github.elifoster.santastoys.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRotatedPillar;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
+public class BlockGiveADamn extends HorizontalDirectionalBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-import io.github.elifoster.santastoys.SantasToys;
-
-public class BlockGiveADamn extends BlockRotatedPillar {
     public BlockGiveADamn() {
-        super(Material.ground);
-        this.setBlockName(BlockInfo.DAMN_UNLOCALIZED_NAME);
-        this.setCreativeTab(SantasToys.tabSantasToys);
-        this.setHardness(1.0F);
-        this.setResistance(1.0F);
-        this.setStepSound(Block.soundTypeSand);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static IIcon frontIcon;
-
-    @SideOnly(Side.CLIENT)
-    public static IIcon elseIcon;
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister ir) {
-        frontIcon = ir.registerIcon("santastoys:damn_front");
-        elseIcon = ir.registerIcon("santastoys:damn_else");
+        super(Properties.of()
+          .strength(1F)
+          .explosionResistance(1F)
+          .sound(SoundType.GRASS));
+        registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
-    protected IIcon getSideIcon(int i) {
-        return elseIcon;
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    protected IIcon getTopIcon(int i) {
-        return frontIcon;
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> state) {
+        state.add(FACING);
     }
 }

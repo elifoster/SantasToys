@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "F": {
+      "item": "minecraft:sticky_piston"
+    },
+    "G": {
+      "item": "minecraft:stone_button"
+    },
+    "X": {
+      "item": "minecraft:iron_ingot"
+    },
+    "Y": {
+      "item": "minecraft:obsidian"
+    },
+    "Z": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "pattern": [
+    "XFZ",
+    "XGE",
+    "YYX"
+  ],
+  "result": {
+    "item": "santastoys:ender_blaster"
+  },
+  "show_notification": true
+}

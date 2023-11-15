@@ -1,40 +1,82 @@
 package io.github.elifoster.santastoys;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import io.github.elifoster.santastoys.blocks.BlockHandler;
+import io.github.elifoster.santastoys.datagen.*;
 import io.github.elifoster.santastoys.items.ItemHandler;
-import io.github.elifoster.santastoys.proxies.CommonProxy;
-import io.github.elifoster.santastoys.world.SpicedSandGenerator;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.ForgeRegistries;
 
-@Mod(modid = "santastoys", name = "Santa's Toys", version = "0.4")
+import java.util.concurrent.CompletableFuture;
+
+import static io.github.elifoster.santastoys.SantasToys.MODID;
+
+@Mod(MODID)
 public class SantasToys {
-    @SidedProxy(clientSide="santa.toys.proxies.ClientProxy", serverSide="santa.toys.proxies.CommonProxy")
-    public static CommonProxy proxy;
-    public static CreativeTabs tabSantasToys = new SantasToysTab();
+    public static final String MODID = "santastoys";
 
-    @Mod.EventHandler
-    void preInit(FMLPreInitializationEvent event) {
-        Config.load(event);
+    public static final DeferredRegister<Block> REGISTER_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+    public static final DeferredRegister<Item> REGISTER_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+    public static final DeferredRegister<EntityType<?>> REGISTER_ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
+
+    public static final DeferredRegister<CreativeModeTab> REGISTER_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+
+    public SantasToys() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.CONFIG);
 
         BlockHandler.initializeBlocks();
-        BlockHandler.registerBlocks();
-        BlockHandler.addRecipes();
+        ItemHandler.initializeItems();
 
-        GameRegistry.registerWorldGenerator(new SpicedSandGenerator(), 1);
+        REGISTER_BLOCKS.register(bus);
+        REGISTER_ITEMS.register(bus);
+        REGISTER_ENTITIES.register(bus);
+        buildTab();
+        REGISTER_TAB.register(bus);
+
+        bus.addListener(SantasToys::generateData);
     }
 
-    @Mod.EventHandler
-    void init(FMLInitializationEvent event) {
-        ItemHandler.initializeItems();
-        ItemHandler.registerItems();
-        ItemHandler.addRecipes();
+    public void buildTab() {
+        REGISTER_TAB.register(MODID, () -> CreativeModeTab.builder()
+          .title(Component.translatable("itemGroup." + MODID))
+          .icon(() -> new ItemStack(ItemHandler.ENDER_BLASTER.get()))
+          .displayItems((enabledFeatures, entries) -> entries.acceptAll(REGISTER_ITEMS.getEntries().stream().map(i -> new ItemStack(i.get())).toList()))
+          .build());
+    }
 
-        proxy.initRenderers();
+    public static void generateData(GatherDataEvent event) {
+        DataGenerator generator = event.getGenerator();
+        PackOutput packOutput = generator.getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        boolean client = event.includeClient();
+        boolean server = event.includeServer();
+        ExistingFileHelper fileHelper = event.getExistingFileHelper();
+
+        generator.addProvider(client, new SantasToysBlockStatesProvider(packOutput, MODID, fileHelper));
+        generator.addProvider(client, new SantasToysItemModelsProvider(packOutput, MODID, fileHelper));
+        SantasToysBlockTagsProvider blockTagsProvider = new SantasToysBlockTagsProvider(packOutput, lookupProvider, MODID, fileHelper);
+        generator.addProvider(server, blockTagsProvider);
+        generator.addProvider(server, new SantasToysItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), MODID, fileHelper));
+        generator.addProvider(server, new SantasToysEntityTypeTagsProvider(packOutput, lookupProvider));
+        generator.addProvider(server, new SantasToysRecipeProvider(packOutput, lookupProvider));
     }
 }
 

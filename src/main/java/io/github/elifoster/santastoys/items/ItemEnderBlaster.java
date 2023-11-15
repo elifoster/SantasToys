@@ -1,34 +1,29 @@
 package io.github.elifoster.santastoys.items;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import io.github.elifoster.santastoys.SantasToys;
 import io.github.elifoster.santastoys.entity.EntityEnderBlast;
-
-import java.util.List;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.Tags;
 
 public class ItemEnderBlaster extends Item {
-    public ItemEnderBlaster() {
-        super();
-        this.maxStackSize = 1;
-        this.setCreativeTab(SantasToys.tabSantasToys);
-        this.setUnlocalizedName(ItemInfo.ENDER_UNLOCALIZED_NAME);
-        this.setTextureName("santastoys:enderblaster");
+    ItemEnderBlaster() {
+        super(new Item.Properties()
+          .stacksTo(1));
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if (player.capabilities.isCreativeMode || player.inventory.hasItem(Items.ender_pearl)) {
-            world.spawnEntityInWorld(new EntityEnderBlast(world, player));
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack heldItem = player.getItemInHand(hand);
+        if (!level.isClientSide() && (player.isCreative() || player.getInventory().contains(Tags.Items.ENDER_PEARLS))) {
+            ThrowableItemProjectile blast = new EntityEnderBlast(level, player);
+            blast.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 2.5f, 1);
+            level.addFreshEntity(blast);
         }
-        return stack;
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4){
-        list.add("Used to kill cows because cows.");
+        return InteractionResultHolder.fail(heldItem);
     }
 }

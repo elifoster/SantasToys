@@ -1,57 +1,70 @@
 package io.github.elifoster.santastoys.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.boss.EntityWither;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
+import io.github.elifoster.santastoys.items.ItemHandler;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 
-public class EntityNetherStarBlast extends EntityThrowable {
-    private int explosionRadius = 1;
+import javax.annotation.Nonnull;
 
-    public EntityNetherStarBlast(World world){
-        super(world);
-        this.setSize(0.25F, 0.25F);
+public class EntityNetherStarBlast extends ThrowableItemProjectile {
+    public EntityNetherStarBlast(Level level, Player player) {
+        super(ItemHandler.NETHER_BLAST.get(), player, level);
     }
 
-    public EntityNetherStarBlast(World world, EntityPlayer player){
-        super(world, player);
+    public EntityNetherStarBlast(Level level, double x, double y, double z) {
+        super(ItemHandler.NETHER_BLAST.get(), x, y, z, level);
     }
 
-    public EntityNetherStarBlast(World world, double x, double y, double z){
-        super(world, x, y, z);
+    public EntityNetherStarBlast(EntityType<? extends EntityNetherStarBlast> entityEntityType, Level level) {
+        super(entityEntityType, level);
     }
 
     @Override
-    protected void onImpact(MovingObjectPosition movingobjpos){
-        if (movingobjpos.entityHit != null) {
-            byte b0 = 5;
+    protected void onHitEntity(@Nonnull EntityHitResult result) {
+        super.onHitEntity(result);
+        Entity entityHit = result.getEntity();
+        float damage = entityHit instanceof WitherBoss ? 10 : 5;
+        entityHit.hurt(entityHit.damageSources().thrown(this, getOwner()), damage);
+        explode();
+    }
 
-            if (movingobjpos.entityHit instanceof EntityWither) {
-                b0 = 10;
-            }
+    @Override
+    protected void onHitBlock(@Nonnull BlockHitResult result) {
+        super.onHitBlock(result);
+        explode();
+    }
 
-            movingobjpos.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this,
-              this.getThrower()), (float) b0);
+    /**
+     * Explodes at the current position with an explosion radius of 1.
+     */
+    private void explode() {
+        level().explode(this, getX(), getY(), getZ(), 1, Level.ExplosionInteraction.BLOCK);
+    }
+
+    @Override
+    protected void onHit(@Nonnull HitResult result) {
+        super.onHit(result);
+        if (!level().isClientSide()) {
+            discard();
         }
-        this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ,
-          (float) this.explosionRadius, true);
-        this.setDead();
     }
 
     @Override
-    protected float getGravityVelocity()
-    {
+    protected float getGravity() {
         return 0.01F;
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public float getShadowSize()
-    {
-        return 15.0F;
+    protected Item getDefaultItem() {
+        return Items.NETHER_STAR;
     }
 }

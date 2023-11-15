@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": {
+      "item": "minecraft:flint"
+    },
+    "Z": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "X",
+    "Z"
+  ],
+  "result": {
+    "item": "santastoys:match"
+  },
+  "show_notification": true
+}
