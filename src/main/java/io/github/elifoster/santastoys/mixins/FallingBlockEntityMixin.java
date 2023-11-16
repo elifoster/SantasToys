@@ -20,9 +20,6 @@ public abstract class FallingBlockEntityMixin extends Entity {
     @Shadow
     private BlockState blockState;
 
-    @Shadow
-    public int time;
-
     protected FallingBlockEntityMixin(EntityType<?> type, Level level) {
         super(type, level);
     }
