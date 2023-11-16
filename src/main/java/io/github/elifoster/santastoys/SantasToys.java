@@ -2,6 +2,7 @@ package io.github.elifoster.santastoys;
 
 import io.github.elifoster.santastoys.blocks.BlockHandler;
 import io.github.elifoster.santastoys.datagen.*;
+import io.github.elifoster.santastoys.entity.EntityHandler;
 import io.github.elifoster.santastoys.items.ItemHandler;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -18,6 +19,7 @@ import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -44,6 +46,7 @@ public class SantasToys {
 
         BlockHandler.initializeBlocks();
         ItemHandler.initializeItems();
+        EntityHandler.initializeEntities();
 
         REGISTER_BLOCKS.register(bus);
         REGISTER_ITEMS.register(bus);
@@ -52,6 +55,8 @@ public class SantasToys {
         REGISTER_TAB.register(bus);
 
         bus.addListener(SantasToys::generateData);
+
+        NeoForge.EVENT_BUS.register(new GenericEventHandler());
     }
 
     public void buildTab() {

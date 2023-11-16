@@ -1,6 +1,5 @@
 package io.github.elifoster.santastoys.entity;
 
-import io.github.elifoster.santastoys.items.ItemHandler;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -18,11 +17,11 @@ import javax.annotation.Nonnull;
 
 public class EntityEnderBlast extends ThrowableItemProjectile {
     public EntityEnderBlast(Level level, Player player) {
-        super(ItemHandler.ENDER_BLAST.get(), player, level);
+        super(EntityHandler.ENDER_BLAST.get(), player, level);
     }
 
     public EntityEnderBlast(Level level, double x, double y, double z) {
-        super(ItemHandler.ENDER_BLAST.get(), x, y, z, level);
+        super(EntityHandler.ENDER_BLAST.get(), x, y, z, level);
     }
 
     public EntityEnderBlast(EntityType<? extends EntityEnderBlast> entityEntityType, Level level) {

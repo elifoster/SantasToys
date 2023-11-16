@@ -1,6 +1,5 @@
 package io.github.elifoster.santastoys.entity;
 
-import io.github.elifoster.santastoys.items.ItemHandler;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -17,11 +16,11 @@ import javax.annotation.Nonnull;
 
 public class EntityNetherStarBlast extends ThrowableItemProjectile {
     public EntityNetherStarBlast(Level level, Player player) {
-        super(ItemHandler.NETHER_BLAST.get(), player, level);
+        super(EntityHandler.NETHER_BLAST.get(), player, level);
     }
 
     public EntityNetherStarBlast(Level level, double x, double y, double z) {
-        super(ItemHandler.NETHER_BLAST.get(), x, y, z, level);
+        super(EntityHandler.NETHER_BLAST.get(), x, y, z, level);
     }
 
     public EntityNetherStarBlast(EntityType<? extends EntityNetherStarBlast> entityEntityType, Level level) {

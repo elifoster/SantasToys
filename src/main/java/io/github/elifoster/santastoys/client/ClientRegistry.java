@@ -1,6 +1,6 @@
 package io.github.elifoster.santastoys.client;
 
-import io.github.elifoster.santastoys.items.ItemHandler;
+import io.github.elifoster.santastoys.entity.EntityHandler;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -13,7 +13,8 @@ import static io.github.elifoster.santastoys.SantasToys.MODID;
 public class ClientRegistry {
     @SubscribeEvent
     public static void onRegisterRenders(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ItemHandler.ENDER_BLAST.get(), ThrownItemRenderer::new);
-        event.registerEntityRenderer(ItemHandler.NETHER_BLAST.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(EntityHandler.ENDER_BLAST.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(EntityHandler.NETHER_BLAST.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(EntityHandler.THROWN_BRICK.get(), ThrownItemRenderer::new);
     }
 }
