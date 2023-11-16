@@ -17,9 +17,11 @@ import static io.github.elifoster.santastoys.SantasToys.REGISTER_ITEMS;
 public class BlockHandler {
     public static final String NAME_HEAVY_LIGHT = "heavy_light";
     public static final String NAME_SPICED_SAND = "spiced_sand";
+    public static final String NAME_DECAYING_LIGHT_BLOCK = "decaying_light_block";
 
     public static RegistryObject<Block> HEAVY_LIGHT;
     public static RegistryObject<Item> HEAVY_LIGHT_ITEM;
+    public static RegistryObject<Block> DECAYING_LIGHT_BLOCK;
     public static RegistryObject<Block> SPICED_SAND;
     public static RegistryObject<Item> SPICED_SAND_ITEM;
 
@@ -35,6 +37,7 @@ public class BlockHandler {
           .sound(SoundType.GLASS)
           .mapColor(MapColor.SAND)));
         HEAVY_LIGHT_ITEM = createBlockItem(NAME_HEAVY_LIGHT, HEAVY_LIGHT);
+        DECAYING_LIGHT_BLOCK = REGISTER_BLOCKS.register(NAME_DECAYING_LIGHT_BLOCK, DecayingLightBlock::new);
 
         SPICED_SAND = REGISTER_BLOCKS.register(NAME_SPICED_SAND, BlockSpicedSand::new);
         SPICED_SAND_ITEM = createBlockItem(NAME_SPICED_SAND, SPICED_SAND);
