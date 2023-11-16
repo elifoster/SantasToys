@@ -1,71 +1,44 @@
 package io.github.elifoster.santastoys.items;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import io.github.elifoster.santastoys.Config;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import io.github.elifoster.santastoys.entity.EntityEnderBlast;
+import io.github.elifoster.santastoys.entity.EntityNetherStarBlast;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.registries.RegistryObject;
+
+import static io.github.elifoster.santastoys.SantasToys.*;
 
 public class ItemHandler {
-    public static Item match;
-    public static Item enderBlaster;
-    public static Item netherBlaster;
+    public static final String NAME_MATCH = "match";
+    public static final String NAME_ENDER_BLASTER = "ender_blaster";
+    public static final String NAME_NETHER_BLASTER = "nether_star_blaster";
+    public static final String NAME_ENDER_SHOT = "ender_blast_shot";
+    public static final String NAME_NETHER_SHOT = "nether_blast_shot";
+
+    public static RegistryObject<Item> MATCH;
+    public static RegistryObject<Item> ENDER_BLASTER;
+    public static RegistryObject<Item> NETHER_BLASTER;
+
+    public static RegistryObject<EntityType<EntityEnderBlast>> ENDER_BLAST;
+    public static RegistryObject<EntityType<EntityNetherStarBlast>> NETHER_BLAST;
 
     public static void initializeItems() {
-        if (Config.enableMatch) {
-            match = new ItemMatch();
-        }
+        MATCH = REGISTER_ITEMS.register(NAME_MATCH, ItemMatch::new);
+        ENDER_BLASTER = REGISTER_ITEMS.register(NAME_ENDER_BLASTER, ItemEnderBlaster::new);
+        NETHER_BLASTER = REGISTER_ITEMS.register(NAME_NETHER_BLASTER, ItemNetherStarBlaster::new);
 
-        if (Config.enableEnderBlaster) {
-            enderBlaster = new ItemEnderBlaster();
-            if (Config.enableNetherBlaster) {
-                netherBlaster = new ItemNetherStarBlaster();
-            }
-        }
-    }
-
-    public static void registerItems() {
-        if (Config.enableMatch) {
-            GameRegistry.registerItem(match, ItemInfo.MATCH_KEY);
-        }
-        if (Config.enableEnderBlaster) {
-            GameRegistry.registerItem(enderBlaster, ItemInfo.ENDER_KEY);
-            if (Config.enableNetherBlaster) {
-                GameRegistry.registerItem(netherBlaster, ItemInfo.NETHER_KEY);
-            }
-        }
-    }
-
-    public static void addRecipes(){
-        if (Config.enableMatch) {
-            GameRegistry.addRecipe(new ItemStack(match, 1),
-              "X",
-              "Z",
-              'X', Items.flint,
-              'Z', Items.stick);
-        }
-
-        if (Config.enableEnderBlaster) {
-            GameRegistry.addRecipe(new ItemStack(enderBlaster, 1),
-              "XFZ",
-              "XGE",
-              "YYX",
-              'X', Items.iron_ingot,
-              'Z', Items.diamond,
-              'E', Items.ender_pearl,
-              'F', Blocks.sticky_piston,
-              'G', Blocks.stone_button,
-              'Y', Blocks.obsidian);
-            if (Config.enableNetherBlaster) {
-                GameRegistry.addRecipe(new ItemStack(netherBlaster, 1),
-                  " X ",
-                  "XZX",
-                  " X ",
-                  'X', Items.nether_star,
-                  'Z', enderBlaster);
-            }
-        }
+        ENDER_BLAST = REGISTER_ENTITIES.register(NAME_ENDER_SHOT, () -> EntityType.Builder.<EntityEnderBlast>of(EntityEnderBlast::new, MobCategory.MISC)
+          .sized(0.25f, 0.25f)
+          .clientTrackingRange(4)
+          .updateInterval(10)
+          .build(new ResourceLocation(MODID, NAME_ENDER_SHOT).toString()));
+        NETHER_BLAST = REGISTER_ENTITIES.register(NAME_NETHER_SHOT, () -> EntityType.Builder.<EntityNetherStarBlast>of(EntityNetherStarBlast::new, MobCategory.MISC)
+          .sized(0.25f, 0.25f)
+          .clientTrackingRange(4)
+          .updateInterval(10)
+          .build(new ResourceLocation(MODID, NAME_NETHER_SHOT).toString()));
     }
 }
 

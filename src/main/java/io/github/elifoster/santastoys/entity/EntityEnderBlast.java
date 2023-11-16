@@ -1,61 +1,56 @@
 package io.github.elifoster.santastoys.entity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
+import io.github.elifoster.santastoys.items.ItemHandler;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Endermite;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 
-public class EntityEnderBlast extends EntityThrowable {
-    public EntityEnderBlast(World world){
-        super(world);
-        this.setSize(0.25F, 0.25F);
+import javax.annotation.Nonnull;
+
+public class EntityEnderBlast extends ThrowableItemProjectile {
+    public EntityEnderBlast(Level level, Player player) {
+        super(ItemHandler.ENDER_BLAST.get(), player, level);
     }
 
-    public EntityEnderBlast(World world, EntityPlayer player){
-        super(world, player);
+    public EntityEnderBlast(Level level, double x, double y, double z) {
+        super(ItemHandler.ENDER_BLAST.get(), x, y, z, level);
     }
 
-    public EntityEnderBlast(World world, double x, double y, double z){
-        super(world, x, y, z);
+    public EntityEnderBlast(EntityType<? extends EntityEnderBlast> entityEntityType, Level level) {
+        super(entityEntityType, level);
     }
 
     @Override
-    protected void onImpact(MovingObjectPosition movingobjpos){
-        if (movingobjpos.entityHit != null) {
-            byte b0 = 5;
+    protected void onHitEntity(@Nonnull EntityHitResult result) {
+        Entity entity = result.getEntity();
+        float damage = (entity instanceof EnderMan || entity instanceof EnderDragon || entity instanceof Endermite) ? 0 : 5;
+        entity.hurt(entity.damageSources().thrown(this, getOwner()), damage);
 
-            if (movingobjpos.entityHit instanceof EntityEnderman ||
-              movingobjpos.entityHit instanceof EntityDragon) {
-                b0 = 0;
-            }
-
-            movingobjpos.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this,
-              this.getThrower()), (float) b0);
-
+        if (level().isClientSide()) {
             for (int i = 0; i < 32; ++i) {
-                this.worldObj.spawnParticle("portal", this.posX,
-                  this.posY + this.rand.nextDouble() * 2.0D, this.posZ, this.rand.nextGaussian(),
-                  0.0D, this.rand.nextGaussian());
+                level().addParticle(ParticleTypes.PORTAL, getX(), getY() + random.nextDouble() * 2D, getZ(), random.nextGaussian(), 0D, random.nextGaussian());
             }
-            if (!this.worldObj.isRemote) {
-                this.setDead();
-            }
+        } else {
+            discard();
         }
     }
 
     @Override
-    protected float getGravityVelocity() {
+    protected float getGravity() {
         return 0.01F;
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public float getShadowSize() {
-        return 0.2F;
+    protected Item getDefaultItem() {
+        return Items.ENDER_PEARL;
     }
 }

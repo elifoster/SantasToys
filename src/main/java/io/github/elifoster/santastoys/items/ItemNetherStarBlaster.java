@@ -1,35 +1,31 @@
 package io.github.elifoster.santastoys.items;
 
 import io.github.elifoster.santastoys.entity.EntityNetherStarBlast;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import io.github.elifoster.santastoys.SantasToys;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.Tags;
 
-import java.util.List;
-
+// TODO: Make generic blaster class
 public class ItemNetherStarBlaster extends Item {
-    public ItemNetherStarBlaster() {
-        super();
-        this.maxStackSize = 1;
-        this.setCreativeTab(SantasToys.tabSantasToys);
-        this.setUnlocalizedName(ItemInfo.NETHER_UNLOCALIZED_NAME);
-        this.setTextureName("santastoys:netherblaster");
+    ItemNetherStarBlaster() {
+        super(new Item.Properties()
+          .stacksTo(1));
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        if(player.capabilities.isCreativeMode || player.inventory.hasItem(Items.nether_star)) {
-            world.spawnEntityInWorld(new EntityNetherStarBlast(world, player));
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack heldItem = player.getItemInHand(hand);
+        if (!level.isClientSide() && (player.isCreative() || player.getInventory().contains(Tags.Items.ENDER_PEARLS))) {
+            ThrowableItemProjectile blast = new EntityNetherStarBlast(level, player);
+            blast.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 2.5f, 1);
+            level.addFreshEntity(blast);
         }
-        return stack;
-    }
-
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4){
-        list.add("Similar to the Ender Blaster, but 2 op 4 cows");
+        return InteractionResultHolder.fail(heldItem);
     }
 }
 
