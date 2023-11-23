@@ -9,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -34,6 +35,7 @@ public class SantasToys {
     public static final DeferredRegister<Block> REGISTER_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     public static final DeferredRegister<Item> REGISTER_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<EntityType<?>> REGISTER_ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
+    public static final DeferredRegister<SoundEvent> REGISTER_SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
 
     public static final DeferredRegister<CreativeModeTab> REGISTER_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
@@ -47,6 +49,7 @@ public class SantasToys {
         REGISTER_BLOCKS.register(bus);
         REGISTER_ITEMS.register(bus);
         REGISTER_ENTITIES.register(bus);
+        REGISTER_SOUNDS.register(bus);
         buildTab();
         REGISTER_TAB.register(bus);
 

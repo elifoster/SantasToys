@@ -10,6 +10,7 @@ displayName="${mod_name}"
 displayURL="https://modrinth.com/mod/santas-toys"
 #logoFile="examplemod.png" #TODO
 authors="${mod_authors}"
+credits="Javier Zumer for the blaster sound effect"
 
 description='''${mod_description}'''
 

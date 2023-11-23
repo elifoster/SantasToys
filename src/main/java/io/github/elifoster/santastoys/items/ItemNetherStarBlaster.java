@@ -1,6 +1,7 @@
 package io.github.elifoster.santastoys.items;
 
 import io.github.elifoster.santastoys.entity.EntityNetherStarBlast;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -24,6 +25,7 @@ public class ItemNetherStarBlaster extends Item {
             ThrowableItemProjectile blast = new EntityNetherStarBlast(level, player);
             blast.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, 2.5f, 1);
             level.addFreshEntity(blast);
+            level.playSound(null, player.blockPosition(), ItemHandler.BLASTER_SOUND.get(), SoundSource.PLAYERS, 1f, 1f);
         }
         return InteractionResultHolder.fail(heldItem);
     }
