@@ -22,8 +22,6 @@ public class BlockHandler {
     public static RegistryObject<Block> HEAVY_LIGHT;
     public static RegistryObject<Item> HEAVY_LIGHT_ITEM;
     public static RegistryObject<Block> DECAYING_LIGHT_BLOCK;
-    public static RegistryObject<Block> SPICED_SAND;
-    public static RegistryObject<Item> SPICED_SAND_ITEM;
 
     private static RegistryObject<Item> createBlockItem(String name, Supplier<Block> forBlockSupplier) {
         return REGISTER_ITEMS.register(name, () -> new BlockItem(forBlockSupplier.get(), new Item.Properties()));
@@ -38,8 +36,5 @@ public class BlockHandler {
           .mapColor(MapColor.SAND)));
         HEAVY_LIGHT_ITEM = createBlockItem(NAME_HEAVY_LIGHT, HEAVY_LIGHT);
         DECAYING_LIGHT_BLOCK = REGISTER_BLOCKS.register(NAME_DECAYING_LIGHT_BLOCK, DecayingLightBlock::new);
-
-        SPICED_SAND = REGISTER_BLOCKS.register(NAME_SPICED_SAND, BlockSpicedSand::new);
-        SPICED_SAND_ITEM = createBlockItem(NAME_SPICED_SAND, SPICED_SAND);
     }
 }

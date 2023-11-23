@@ -40,15 +40,6 @@ public class SantasToysRecipeProvider extends RecipeProvider {
           .unlockedBy(UNLOCK_RIGHT_AWAY, PlayerTrigger.TriggerInstance.tick())
           .save(output);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SPICED_SAND_ITEM.get())
-          .pattern("///")
-          .pattern("/#/")
-          .pattern("///")
-          .define('/', Items.BLAZE_ROD)
-          .define('#', Items.SAND)
-          .unlockedBy(UNLOCK_RIGHT_AWAY, PlayerTrigger.TriggerInstance.tick())
-          .save(output);
-
         /*
         Items
          */

@@ -14,7 +14,6 @@ public class SantasToysBlockStatesProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        simpleBlock(BlockHandler.SPICED_SAND.get());
         simpleBlock(BlockHandler.HEAVY_LIGHT.get(), cubeAll(Blocks.GLOWSTONE));
         getVariantBuilder(BlockHandler.DECAYING_LIGHT_BLOCK.get())
           .forAllStates(state -> new ConfiguredModel[] { new ConfiguredModel(models().getExistingFile(mcLoc("block/air"))) });

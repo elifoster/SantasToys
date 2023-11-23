@@ -1,6 +1,5 @@
 package io.github.elifoster.santastoys.datagen;
 
-import io.github.elifoster.santastoys.blocks.BlockHandler;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -11,7 +10,7 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.ForgeRegistries;
 
-import static io.github.elifoster.santastoys.blocks.BlockHandler.*;
+import static io.github.elifoster.santastoys.blocks.BlockHandler.HEAVY_LIGHT;
 import static io.github.elifoster.santastoys.items.ItemHandler.*;
 
 public class SantasToysItemModelsProvider extends ItemModelProvider {
@@ -21,7 +20,6 @@ public class SantasToysItemModelsProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent(SPICED_SAND.getId().getPath(), modLoc("block/" + BlockHandler.NAME_SPICED_SAND));
         withExistingParent(HEAVY_LIGHT.getId().getPath(), mcLoc("glowstone"));
         basicItem(MATCH.get());
         blasterItem(ENDER_BLASTER.get());
