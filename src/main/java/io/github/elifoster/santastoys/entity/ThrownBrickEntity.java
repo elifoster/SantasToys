@@ -1,5 +1,6 @@
 package io.github.elifoster.santastoys.entity;
 
+import io.github.elifoster.santastoys.util.MiscHelper;
 import io.github.elifoster.santastoys.util.TagsHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -83,7 +84,7 @@ public class ThrownBrickEntity extends ThrowableItemProjectile {
         if (id == EVENT_ID) {
             ParticleOptions particles = new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(getDefaultItem()));
             for (int i = 0; i < 8; ++i) {
-                level().addParticle(particles, getX(), getY(), getZ(), 0, 0, 0);
+                level().addParticle(particles, getX(), getY(), getZ(), MiscHelper.entityBreakVelocity(), MiscHelper.entityBreakVelocity(), MiscHelper.entityBreakVelocity());
             }
         }
     }
