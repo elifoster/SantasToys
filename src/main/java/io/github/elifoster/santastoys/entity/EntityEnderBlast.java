@@ -1,5 +1,6 @@
 package io.github.elifoster.santastoys.entity;
 
+import io.github.elifoster.santastoys.util.MiscHelper;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -11,11 +12,14 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 
 import javax.annotation.Nonnull;
 
 public class EntityEnderBlast extends ThrowableItemProjectile {
+    private static final byte EVENT_ID = 2;
+
     public EntityEnderBlast(Level level, Player player) {
         super(EntityHandler.ENDER_BLAST.get(), player, level);
     }
@@ -34,12 +38,27 @@ public class EntityEnderBlast extends ThrowableItemProjectile {
         float damage = (entity instanceof EnderMan || entity instanceof EnderDragon || entity instanceof Endermite) ? 0 : 5;
         entity.hurt(entity.damageSources().thrown(this, getOwner()), damage);
 
-        if (level().isClientSide()) {
-            for (int i = 0; i < 32; ++i) {
-                level().addParticle(ParticleTypes.PORTAL, getX(), getY() + random.nextDouble() * 2D, getZ(), random.nextGaussian(), 0D, random.nextGaussian());
-            }
-        } else {
+        if (!level().isClientSide()) {
+            level().broadcastEntityEvent(this, EVENT_ID);
             discard();
+        }
+    }
+
+    @Override
+    protected void onHitBlock(BlockHitResult hitResult) {
+        super.onHitBlock(hitResult);
+        if (!level().isClientSide()) {
+            level().broadcastEntityEvent(this, EVENT_ID);
+            discard();
+        }
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == EVENT_ID) {
+            for (int i = 0; i < 32; ++i) {
+                level().addParticle(ParticleTypes.PORTAL, getX(), getY(), getZ(), MiscHelper.entityBreakVelocity(), MiscHelper.entityBreakVelocity(), MiscHelper.entityBreakVelocity());
+            }
         }
     }
 
