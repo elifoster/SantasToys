@@ -9,10 +9,9 @@ import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.neoforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Collections;
-import java.util.function.Supplier;
 
 import static io.github.elifoster.santastoys.SantasToys.REGISTER_BLOCKS;
 import static io.github.elifoster.santastoys.SantasToys.REGISTER_ITEMS;
@@ -21,11 +20,11 @@ public class BlockHandler {
     public static final String NAME_HEAVY_LIGHT = "heavy_light";
     public static final String NAME_DECAYING_LIGHT_BLOCK = "decaying_light_block";
 
-    public static RegistryObject<Block> HEAVY_LIGHT;
-    public static RegistryObject<Item> HEAVY_LIGHT_ITEM;
-    public static RegistryObject<Block> DECAYING_LIGHT_BLOCK;
+    public static DeferredHolder<Block, FallingBlock> HEAVY_LIGHT;
+    public static DeferredHolder<Item, BlockItem> HEAVY_LIGHT_ITEM;
+    public static DeferredHolder<Block, DecayingLightBlock> DECAYING_LIGHT_BLOCK;
 
-    private static RegistryObject<Item> createBlockItem(String name, Supplier<Block> forBlockSupplier) {
+    private static DeferredHolder<Item, BlockItem> createBlockItem(String name, DeferredHolder<Block, ? extends Block> forBlockSupplier) {
         return REGISTER_ITEMS.register(name, () -> new BlockItem(forBlockSupplier.get(), new Item.Properties()));
     }
 
@@ -49,7 +48,7 @@ public class BlockHandler {
 
             @Override
             protected Iterable<Block> getKnownBlocks() {
-                return REGISTER_BLOCKS.getEntries().stream().map(RegistryObject::get).toList();
+                return REGISTER_BLOCKS.getEntries().stream().map((s) -> (Block) s.get()).toList();
             }
         };
     }

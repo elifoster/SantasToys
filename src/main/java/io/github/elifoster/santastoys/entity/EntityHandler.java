@@ -3,7 +3,8 @@ package io.github.elifoster.santastoys.entity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.neoforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 import static io.github.elifoster.santastoys.SantasToys.MODID;
 import static io.github.elifoster.santastoys.SantasToys.REGISTER_ENTITIES;
@@ -12,9 +13,9 @@ public class EntityHandler {
     public static final String NAME_ENDER_SHOT = "ender_blast_shot";
     public static final String NAME_NETHER_SHOT = "nether_blast_shot";
     public static final String NAME_THROWN_BRICK = "thrown_brick";
-    public static RegistryObject<EntityType<EntityEnderBlast>> ENDER_BLAST;
-    public static RegistryObject<EntityType<EntityNetherStarBlast>> NETHER_BLAST;
-    public static RegistryObject<EntityType<ThrownBrickEntity>> THROWN_BRICK;
+    public static Supplier<EntityType<EntityEnderBlast>> ENDER_BLAST;
+    public static Supplier<EntityType<EntityNetherStarBlast>> NETHER_BLAST;
+    public static Supplier<EntityType<ThrownBrickEntity>> THROWN_BRICK;
 
     public static void initializeEntities() {
         ENDER_BLAST = REGISTER_ENTITIES.register(NAME_ENDER_SHOT, () -> EntityType.Builder.<EntityEnderBlast>of(EntityEnderBlast::new, MobCategory.MISC)

@@ -5,6 +5,7 @@ import io.github.elifoster.santastoys.datagen.*;
 import io.github.elifoster.santastoys.entity.EntityHandler;
 import io.github.elifoster.santastoys.items.ItemHandler;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -24,7 +25,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.ForgeRegistries;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,10 +36,10 @@ import static io.github.elifoster.santastoys.SantasToys.MODID;
 public class SantasToys {
     public static final String MODID = "santastoys";
 
-    public static final DeferredRegister<Block> REGISTER_BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    public static final DeferredRegister<Item> REGISTER_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    public static final DeferredRegister<EntityType<?>> REGISTER_ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
-    public static final DeferredRegister<SoundEvent> REGISTER_SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
+    public static final DeferredRegister<Block> REGISTER_BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, MODID);
+    public static final DeferredRegister<Item> REGISTER_ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, MODID);
+    public static final DeferredRegister<EntityType<?>> REGISTER_ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, MODID);
+    public static final DeferredRegister<SoundEvent> REGISTER_SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, MODID);
 
     public static final DeferredRegister<CreativeModeTab> REGISTER_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
