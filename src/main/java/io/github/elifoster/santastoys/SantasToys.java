@@ -8,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -24,6 +26,8 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.ForgeRegistries;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import static io.github.elifoster.santastoys.SantasToys.MODID;
@@ -81,6 +85,7 @@ public class SantasToys {
         generator.addProvider(server, new SantasToysItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), MODID, fileHelper));
         generator.addProvider(server, new SantasToysEntityTypeTagsProvider(packOutput, lookupProvider));
         generator.addProvider(server, new SantasToysRecipeProvider(packOutput, lookupProvider));
+        generator.addProvider(server, new LootTableProvider(packOutput, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(BlockHandler::getLootSubProvider, LootContextParamSets.BLOCK))));
     }
 }
 
