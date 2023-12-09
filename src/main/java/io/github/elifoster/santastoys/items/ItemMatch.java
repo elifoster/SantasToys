@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -28,25 +29,31 @@ public class ItemMatch extends Item {
         BlockState state = level.getBlockState(pos);
         ItemStack match = context.getItemInHand();
 
+        boolean used = false;
+
         if (canLightBlock(state)) {
-            playFlintSound(level, player, pos);
             level.setBlock(pos, state.setValue(BlockStateProperties.LIT, Boolean.TRUE), 11);
             level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
-            if (player != null && !player.isCreative()) {
-                match.shrink(1);
-            }
+            used = true;
+        }
 
-            return InteractionResult.sidedSuccess(level.isClientSide());
+        if (!used && state.is(Blocks.TNT)) {
+            state.getBlock().onCaughtFire(state, level, pos, context.getClickedFace(), player);
+            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+            used = true;
         }
 
         BlockPos offsetPos = pos.relative(context.getClickedFace());
-        if (BaseFireBlock.canBePlacedAt(level, offsetPos, context.getHorizontalDirection())) {
-            playFlintSound(level, player, pos);
+        if (!used && BaseFireBlock.canBePlacedAt(level, offsetPos, context.getHorizontalDirection())) {
             BlockState fire = BaseFireBlock.getState(level, offsetPos);
             level.setBlock(offsetPos, fire, 11);
             level.gameEvent(player, GameEvent.BLOCK_PLACE, pos);
+            used = true;
+        }
 
-            if (player != null && !player.isCreative()) {
+        if (used) {
+            playFlintSound(level, player, pos);
+            if (!(player == null || player.isCreative())) {
                 match.shrink(1);
             }
 
