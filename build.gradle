@@ -7,7 +7,14 @@ plugins {
     id 'net.neoforged.gradle.mixin' version '7.0.43'
 }
 
-version = mod_version
+def stdout = new ByteArrayOutputStream()
+exec {
+    commandLine 'git', 'rev-parse', '--short', 'HEAD'
+    standardOutput = stdout
+}
+def commit = stdout.toString().replace("\n", "").replace("\r", "").trim()
+
+version = project.hasProperty("dev") ? commit : mod_version
 group = mod_group_id
 
 repositories {
