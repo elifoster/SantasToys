@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "inverted=false,powered=false": {
+      "model": "santastoys:block/liquid_sensor_off"
+    },
+    "inverted=false,powered=true": {
+      "model": "santastoys:block/liquid_sensor_on"
+    },
+    "inverted=true,powered=false": {
+      "model": "santastoys:block/liquid_sensor_inverted_off"
+    },
+    "inverted=true,powered=true": {
+      "model": "santastoys:block/liquid_sensor_inverted_on"
+    }
+  }
+}

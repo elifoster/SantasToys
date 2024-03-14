@@ -10,7 +10,7 @@ import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
-import static io.github.elifoster.santastoys.blocks.BlockHandler.HEAVY_LIGHT;
+import static io.github.elifoster.santastoys.blocks.BlockHandler.*;
 import static io.github.elifoster.santastoys.items.ItemHandler.*;
 
 public class SantasToysItemModelsProvider extends ItemModelProvider {
@@ -24,6 +24,7 @@ public class SantasToysItemModelsProvider extends ItemModelProvider {
         basicItem(MATCH.get());
         blasterItem(ENDER_BLASTER.get());
         blasterItem(NETHER_BLASTER.get());
+        cubeAll(LIQUID_SENSOR.getId().getPath(), modLoc("block/liquid_sensor_off"));
     }
 
     /**

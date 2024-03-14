@@ -17,6 +17,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -37,6 +38,7 @@ public class SantasToys {
     public static final String MODID = "santastoys";
 
     public static final DeferredRegister<Block> REGISTER_BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, MODID);
+    public static final DeferredRegister<BlockEntityType<?>> REGISTER_BLOCK_ENTITY_TYPES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, MODID);
     public static final DeferredRegister<Item> REGISTER_ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, MODID);
     public static final DeferredRegister<EntityType<?>> REGISTER_ENTITIES = DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, MODID);
     public static final DeferredRegister<SoundEvent> REGISTER_SOUNDS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, MODID);
@@ -51,6 +53,7 @@ public class SantasToys {
         EntityHandler.initializeEntities();
 
         REGISTER_BLOCKS.register(bus);
+        REGISTER_BLOCK_ENTITY_TYPES.register(bus);
         REGISTER_ITEMS.register(bus);
         REGISTER_ENTITIES.register(bus);
         REGISTER_SOUNDS.register(bus);

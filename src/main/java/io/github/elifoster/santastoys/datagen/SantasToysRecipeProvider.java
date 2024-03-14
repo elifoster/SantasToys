@@ -3,10 +3,7 @@ package io.github.elifoster.santastoys.datagen;
 import net.minecraft.advancements.critereon.PlayerTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -39,6 +36,12 @@ public class SantasToysRecipeProvider extends RecipeProvider {
           .define('Y', Items.GLOWSTONE)
           .unlockedBy(UNLOCK_RIGHT_AWAY, PlayerTrigger.TriggerInstance.tick())
           .save(output);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE, LIQUID_SENSOR_ITEM.get())
+            .requires(Items.OBSERVER)
+            .requires(Items.BUCKET)
+            .unlockedBy("has_observer", has(Items.OBSERVER))
+            .save(output);
 
         /*
         Items
