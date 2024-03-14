@@ -22,7 +22,7 @@ repositories {
 }
 
 base {
-    archivesName = mod_id
+    archivesName = project.projectDir.name + "-mc1.20.2"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -55,7 +55,6 @@ runs {
 sourceSets.main.resources {
     srcDir 'src/generated/resources'
 }
-
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
