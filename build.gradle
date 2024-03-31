@@ -3,8 +3,8 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.43'
-    id 'net.neoforged.gradle.mixin' version '7.0.43'
+    id 'net.neoforged.gradle.userdev' version '7.0.97'
+    id 'net.neoforged.gradle.mixin' version '7.0.97'
 }
 
 def stdout = new ByteArrayOutputStream()
@@ -22,7 +22,7 @@ repositories {
 }
 
 base {
-    archivesName = project.projectDir.name + "-mc1.20.2"
+    archivesName = project.projectDir.name + "-mc1.20.4"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -60,8 +60,11 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 }
 
-mixin {
-    config 'mixins.santastoys.json'
+subsystems {
+    parchment {
+        minecraftVersion = "1.20.2"
+        mappingsVersion = "2023.12.10"
+    }
 }
 
 tasks.withType(ProcessResources).configureEach {

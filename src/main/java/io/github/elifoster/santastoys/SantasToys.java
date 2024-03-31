@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -45,9 +44,7 @@ public class SantasToys {
 
     public static final DeferredRegister<CreativeModeTab> REGISTER_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public SantasToys() {
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-
+    public SantasToys(IEventBus bus) {
         BlockHandler.initializeBlocks();
         ItemHandler.initializeItems();
         EntityHandler.initializeEntities();
@@ -87,7 +84,7 @@ public class SantasToys {
         generator.addProvider(server, blockTagsProvider);
         generator.addProvider(server, new SantasToysItemTagsProvider(packOutput, lookupProvider, blockTagsProvider.contentsGetter(), MODID, fileHelper));
         generator.addProvider(server, new SantasToysEntityTypeTagsProvider(packOutput, lookupProvider));
-        generator.addProvider(server, new SantasToysRecipeProvider(packOutput, lookupProvider));
+        generator.addProvider(server, new SantasToysRecipeProvider(packOutput));
         generator.addProvider(server, new LootTableProvider(packOutput, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(BlockHandler::getLootSubProvider, LootContextParamSets.BLOCK))));
     }
 }

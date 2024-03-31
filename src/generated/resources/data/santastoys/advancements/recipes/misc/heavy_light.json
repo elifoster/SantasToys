@@ -21,6 +21,5 @@
     "recipes": [
       "santastoys:heavy_light"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

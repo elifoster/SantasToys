@@ -21,6 +21,5 @@
     "recipes": [
       "santastoys:nether_star_blaster"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

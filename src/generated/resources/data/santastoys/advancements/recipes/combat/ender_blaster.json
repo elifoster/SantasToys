@@ -21,6 +21,5 @@
     "recipes": [
       "santastoys:ender_blaster"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

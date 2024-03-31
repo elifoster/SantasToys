@@ -28,7 +28,7 @@ public class LiquidSensorBlock extends Block implements EntityBlock {
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
     public LiquidSensorBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.OBSERVER));
+        super(BlockBehaviour.Properties.ofLegacyCopy(Blocks.OBSERVER));
         registerDefaultState(stateDefinition.any().setValue(INVERTED, false).setValue(POWERED, false));
     }
 

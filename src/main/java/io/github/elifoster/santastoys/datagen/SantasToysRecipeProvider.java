@@ -1,23 +1,21 @@
 package io.github.elifoster.santastoys.datagen;
 
 import net.minecraft.advancements.critereon.PlayerTrigger;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
-import java.util.concurrent.CompletableFuture;
-
-import static io.github.elifoster.santastoys.blocks.BlockHandler.*;
+import static io.github.elifoster.santastoys.blocks.BlockHandler.HEAVY_LIGHT_ITEM;
+import static io.github.elifoster.santastoys.blocks.BlockHandler.LIQUID_SENSOR_ITEM;
 import static io.github.elifoster.santastoys.items.ItemHandler.*;
 
 public class SantasToysRecipeProvider extends RecipeProvider {
     private static final String UNLOCK_RIGHT_AWAY = "unlock_right_away";
 
-    public SantasToysRecipeProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(packOutput, lookupProvider);
+    public SantasToysRecipeProvider(PackOutput packOutput) {
+        super(packOutput);
     }
 
     @Override

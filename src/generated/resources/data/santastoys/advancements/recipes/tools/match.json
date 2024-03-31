@@ -21,6 +21,5 @@
     "recipes": [
       "santastoys:match"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

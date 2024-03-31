@@ -2,10 +2,12 @@ package io.github.elifoster.santastoys.blocks;
 
 import io.github.elifoster.santastoys.blocks.blockentities.LiquidSensorBlockEntity;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ColoredFallingBlock;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -35,12 +37,13 @@ public class BlockHandler {
     }
 
     public static void initializeBlocks() {
-        HEAVY_LIGHT = REGISTER_BLOCKS.register(NAME_HEAVY_LIGHT, () -> new FallingBlock(BlockBehaviour.Properties.of()
-          .strength(0.6F)
-          .explosionResistance(1F)
-          .lightLevel(state -> 15)
-          .sound(SoundType.GLASS)
-          .mapColor(MapColor.SAND)));
+        HEAVY_LIGHT = REGISTER_BLOCKS.register(NAME_HEAVY_LIGHT, () -> new ColoredFallingBlock(new ColorRGBA(-7968712),
+          BlockBehaviour.Properties.of()
+              .strength(0.6F)
+              .explosionResistance(1F)
+              .lightLevel(state -> 15)
+              .sound(SoundType.GLASS)
+              .mapColor(MapColor.SAND)));
         HEAVY_LIGHT_ITEM = createBlockItem(NAME_HEAVY_LIGHT, HEAVY_LIGHT);
         DECAYING_LIGHT_BLOCK = REGISTER_BLOCKS.register(NAME_DECAYING_LIGHT_BLOCK, DecayingLightBlock::new);
         LIQUID_SENSOR = REGISTER_BLOCKS.register(NAME_LIQUID_SENSOR, LiquidSensorBlock::new);
