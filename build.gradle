@@ -62,8 +62,8 @@ dependencies {
 
 subsystems {
     parchment {
-        minecraftVersion = "1.20.2"
-        mappingsVersion = "2023.12.10"
+        minecraftVersion = parchment_mc_version
+        mappingsVersion = parchment_mappings_version
     }
 }
 
